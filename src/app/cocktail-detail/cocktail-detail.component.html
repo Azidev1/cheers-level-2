@@ -1,0 +1,54 @@
+<button routerLink='/' class="bi bi-backspace" style="margin: 25px;">Back</button>
+@if (cocktail()) {
+  <div class="row cocktail-detail">
+    <div class="col-md-4">
+      <img [src]="cocktail()?.imageUrl" class="card-img-top" [alt]="cocktail()?.name">
+    </div>
+    <div class="col-md-8">
+      <div class="card-body">
+        <h2 class="card-title cocktail-title">
+          {{ cocktail()?.name }}
+          <span id="star-{{cocktail()?.id}}" class="icon-star cocktail-star"
+                [ngClass]="service.isStar(cocktail()) ? 'active' : ''" (click)="service.manageStar(cocktail())"></span>
+        </h2>
+        <br>
+        <div class="row">
+          <div class="col-md-2">
+            <span style="margin-left: 20px; font-weight: bold;">Type: </span>
+          </div>
+          <div class="col-md-10">
+            @if (cocktail()?.isAlcoholic) {
+              <span class="badge rounded-pill text-bg-warning">Alcoholic</span>
+            } @else {
+              <span class="badge text-bg-success">non alcoholic</span>
+            }
+          </div>
+        </div>
+        <br>
+        <div class="row">
+          <div style="align-content: center" class="col-md-2">
+            <span style="margin-left: 20px; font-weight: bold;">Ingredients: </span>
+          </div>
+          <div class="col-md-10">
+            <ul>
+              @for (ingredient of cocktail()?.ingredients; track ingredient) {
+                <li>{{ ingredient }}</li>
+              }
+            </ul>
+          </div>
+        </div>
+        <br>
+        <div class="row">
+          <div style="padding-top: 7px;" class="col-md-2">
+            <span style="margin-left: 20px; font-weight: bold;">Instructions: </span>
+          </div>
+          <div class="col-md-10">
+            <p style=" max-width: 300px;">
+              {{ cocktail()?.instructions }}
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+}

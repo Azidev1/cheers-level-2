@@ -1,0 +1,24 @@
+<div class="row cocktail-item">
+  <div class="col-md-4">
+    <img [src]="cocktail().imageUrl" class="card-img-top" [alt]="cocktail().name">
+  </div>
+  <div class="col-md-8">
+    <div class="card-body">
+      <span id="star-{{cocktail().id}}" class="icon-star cocktail-star" [ngClass]="isStar() ? 'active' : ''"
+            (click)="manageStar.emit(cocktail())"></span>
+      <h2 class="card-title cocktail-title">
+        <a routerLink='/cocktails/{{ cocktail().id }}'>{{ cocktail().name }}</a>
+      </h2>
+      <br>
+      @if (cocktail().isAlcoholic) {
+        <span class="badge rounded-pill text-bg-warning">Alcoholic</span>
+      } @else {
+        <span class="badge text-bg-success">non alcoholic</span>
+      }
+      <br><br>
+      <ng-container *ngFor="let ingredient of cocktail().ingredients; last as isLast">
+        <span>{{ ingredient }}</span><span *ngIf="!isLast"> | </span>
+      </ng-container>
+    </div>
+  </div>
+</div>

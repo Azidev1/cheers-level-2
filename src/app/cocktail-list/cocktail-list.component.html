@@ -1,0 +1,19 @@
+<div class="container">
+  <form>
+    <fieldset>
+      <legend>Filters</legend>
+      <label>Cocktail name</label>
+      <input #cocktail type="text" name="cocktail" (input)="service.filtersCocktail.set(cocktail.value)">
+    </fieldset>
+  </form>
+
+  <div class="row">
+    @for (cocktail of service.filteredCocktails(); track cocktail.id) {
+      <div class="col-md-6">
+        <cocktail-item [cocktail]="cocktail" [isStar]="service.isStar(cocktail)"
+                       (manageStar)="service.manageStar(cocktail)"/>
+      </div>
+    }
+  </div>
+
+</div>
